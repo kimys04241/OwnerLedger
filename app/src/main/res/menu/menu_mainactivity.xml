@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_change_info"
+        android:title="정보변경"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_backup"
+        android:title="스크랩열람"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_help"
+        android:title="도움말"
+        app:showAsAction="never" />
+
+
+</menu>

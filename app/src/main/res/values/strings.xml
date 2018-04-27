@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">OwnerLedger</string>
+    <string name="password_error">비밀번호를 다시 입력해 주세요.</string>
+    <string name="nickname_error">닉네임을 입력하세요.</string>
+</resources>
