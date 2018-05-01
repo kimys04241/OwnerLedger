@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">OwnerLedger</string>
-    <string name="password_error">비밀번호를 다시 입력해 주세요.</string>
-    <string name="nickname_error">닉네임을 입력하세요.</string>
+    <string name="password_error">비밀번호 미입력 오류</string>
+    <string name="nickname_error">닉네임을 입력 오류</string>
+    <string name="password_discord_error">패스워드 불일치 오류</string>
+    <string name="appbar_title_home">홈</string>
+    <string name="appbar_title_customer">고객관리</string>
 </resources>

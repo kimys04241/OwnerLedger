@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CalendarView
+        android:id="@+id/cv_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+    </CalendarView>
+
+    <RelativeLayout
+        android:id="@+id/divide_1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDivide"
+        android:layout_below="@id/cv_calendar"
+        android:layout_marginTop="4dp">
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_home_ymd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="YYYY-MM-DD"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/divide_1"
+        android:gravity="center" />
+    <RelativeLayout
+        android:id="@+id/divide_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_home_ymd"
+        android:background="@color/colorDivide">
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_home_datesale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="일 매출"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/divide_2"
+        android:background="@color/tvHomeDatesale"/>
+    <TextView
+        android:id="@+id/tv_home_datepurchace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="일 매입"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/tv_home_datesale"
+        android:background="@color/tvHomeDatePurchace"/>
+    <TextView
+        android:id="@+id/tv_home_datetax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="일 부가세"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/tv_home_datepurchace"
+        android:background="@color/tvHomeDateTax"/>
+    <TextView
+        android:id="@+id/tv_home_dateearn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="일 순수익"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/tv_home_datetax"
+        android:background="@color/tvHomeDateEarn"/>
+    <RelativeLayout
+        android:id="@+id/divide_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_home_dateearn"
+        android:background="@color/colorDivide">
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_home_yeartax"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="예상 연 부가세"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/divide_3"
+        android:background="@color/tvHomeYear"/>
+    <TextView
+        android:id="@+id/tv_home_yeareran"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="예상 연 순이익"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/tv_home_yeartax"
+        android:background="@color/tvHomeYear"/>
+
+
+
+
+</RelativeLayout>

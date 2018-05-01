@@ -6,21 +6,30 @@ package com.ysking.ownerledger.user.information;
 
 public class UserInformation {
     private static String nickname;
-    private static int password;
+    private static String password;
+    private static boolean isFirstRun;
 
-    public String getNickname() {
+    public static String getNickname() {
         return nickname;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public static void setNickname(String nickname) {
+        UserInformation.nickname = nickname;
     }
 
-    public int getPassword() {
+    public static String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
-        this.password = password;
+    public static void setPassword(String password) {
+        UserInformation.password = password;
+    }
+
+    public static boolean getIsIsFirstRun() {
+        return isFirstRun;
+    }
+
+    public static void setIsFirstRun(boolean isFirstRun) {
+        UserInformation.isFirstRun = isFirstRun;
     }
 }

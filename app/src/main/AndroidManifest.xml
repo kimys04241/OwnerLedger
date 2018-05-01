@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".AppFristRun"></activity>
+        <activity android:name=".user.information.AppFristRun"></activity>
     </application>
 
 </manifest>
