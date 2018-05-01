@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ysking.ownerledger.R;
+import com.ysking.ownerledger.date.DateManager;
 
 import java.util.Calendar;
 
@@ -24,6 +25,7 @@ public class FragmentHome extends Fragment {
 
     CalendarView calendarView;
     TextView tvYMD;
+    String today;
 
     @Nullable
     @Override
@@ -32,7 +34,9 @@ public class FragmentHome extends Fragment {
         Calendar calendar=Calendar.getInstance();
         calendarView=view.findViewById(R.id.cv_calendar);
         tvYMD=view.findViewById(R.id.tv_home_ymd);
-        tvYMD.setText(calendar.get(Calendar.YEAR)+"-"+String.format("%02d", calendar.get(Calendar.MONTH)+1)+"-"+String.format("%02d", calendar.get(Calendar.DATE)));
+        today=String.format("%d-%02d-%02d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DATE));
+        DateManager.setToday(today);
+        tvYMD.setText(today);
         calendarView.setOnDateChangeListener(dateChangeListener);
         return view;
     }

@@ -11,15 +11,16 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".IntroActivity"
-            android:theme="@style/IntroTheme">
+            android:theme="@style/AppThemeNoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".user.information.AppFristRun"></activity>
+        <activity android:name=".MainActivity" android:theme="@style/AppThemeNoActionbar" />
+        <activity android:name=".user.information.AppFristRun" android:theme="@style/AppThemeNoActionbar"/>
+        <activity android:name=".activitys.AddCustomer"></activity>
     </application>
 
 </manifest>
