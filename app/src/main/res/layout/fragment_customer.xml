@@ -8,12 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!--<ImageView-->
-            <!--android:id="@+id/btn_search"-->
-            <!--android:layout_width="48dp"-->
-            <!--android:layout_height="48dp"-->
-            <!--android:src="@drawable/ic_search_black_24dp"-->
-            <!--android:clickable="true"/>-->
         <android.support.v7.widget.SearchView
             android:id="@+id/sv"
             android:layout_width="250dp"
@@ -43,15 +37,11 @@
         android:elevation="4dp">
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_test"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1">-->
-    <!--</android.support.v7.widget.RecyclerView>-->
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

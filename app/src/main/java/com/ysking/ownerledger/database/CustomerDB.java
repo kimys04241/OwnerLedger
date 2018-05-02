@@ -19,7 +19,7 @@ public class CustomerDB {
     String customerAddress;
     String customerDetail;
 
-    String readResult;
+    String[][] readResult;
 
     private String dbName="customer.db";
     private String tableName="customer";
@@ -44,7 +44,7 @@ public class CustomerDB {
 
         int cnt=cursor.getCount();
 
-        StringBuffer buffer=new StringBuffer();
+        readResult=new String[cnt][7];
 
         while (cursor.moveToNext()){
             int no=cursor.getInt(0);
@@ -55,13 +55,17 @@ public class CustomerDB {
             String address=cursor.getString(5);
             String detail=cursor.getString(6);
 
-            buffer.append(no+" "+name+" "+phone+" "+birth+" "+gender+" "+address+" "+detail+"\n");
-        }
+            for(int i=0; i<readResult[0].length; i++){
+                readResult[no-1][i]=cursor.getString(i);
+            }
 
-        readResult=buffer.toString();
+            //buffer.append(no+" "+name+" "+phone+" "+birth+" "+gender+" "+address+" "+detail+"\n");
+        }
+        //readResult=buffer.toString();
+
     }
 
-    public String getReadResult() {
+    public String[][] getReadResult() {
         return readResult;
     }
 }
