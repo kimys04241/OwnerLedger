@@ -5,4 +5,7 @@
     <string name="password_discord_error">패스워드 불일치 오류</string>
     <string name="appbar_title_home">홈</string>
     <string name="appbar_title_customer">고객관리</string>
+    <string name="dialog_addcustomer_cancel_message">고객관리를 나가시겠습니까?</string>
+    <string name="dialog_submessage">나가신다면 입력한 자료는 사라집니다.</string>
+    <string name="dialog_addcustomer_name_error">이름은 필수 입력정보 입니다.</string>
 </resources>

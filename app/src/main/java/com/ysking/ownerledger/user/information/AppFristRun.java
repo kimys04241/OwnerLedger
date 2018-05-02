@@ -41,7 +41,7 @@ public class AppFristRun extends AppCompatActivity {
         String password=editPassword.getText().toString();
         String passwordCheck=editPasswordCheck.getText().toString();
 
-        int checkResult=errorChecker.check(nickname, password, passwordCheck);
+        int checkResult=errorChecker.checkJoin(nickname, password, passwordCheck);
         switch (checkResult){
             case ErrorChecker.nicknameError:
                 new AlertDialog.Builder(this).setMessage(R.string.nickname_error).setPositiveButton("확인", null).create().show();
@@ -52,7 +52,7 @@ public class AppFristRun extends AppCompatActivity {
             case ErrorChecker.passwordDiscord:
                 new AlertDialog.Builder(this).setMessage(R.string.password_discord_error).setPositiveButton("확인", null).create().show();
                 break;
-            case ErrorChecker.allOk:
+            case ErrorChecker.checkJoinOk:
                 RegistUserInfo registUserInfo=new RegistUserInfo(this);
                 registUserInfo.registInfo(nickname, password, false);
                 registUserInfo.loadInfo();

@@ -6,12 +6,17 @@ package com.ysking.ownerledger.error;
 
 public class ErrorChecker {
 
+    //checkJoin 리턴값
     public static final int nicknameError=1;
     public static final int passwordLengthError=2;
     public static final int passwordDiscord=3;
-    public static final int allOk=4;
+    public static final int checkJoinOk=4;
 
-    public int check(String nickname, String password, String passwordCheck){
+    //checkCustomerRegist
+    public static final int customerNameError=10;
+    public static final int checkCustomerRegistOk=20;
+
+    public int checkJoin(String nickname, String password, String passwordCheck){
         if(nickname.length()<=0){
             return nicknameError;
         }else if(password.length()<4 || passwordCheck.length()<4){
@@ -19,7 +24,16 @@ public class ErrorChecker {
         }else if(!password.equals(passwordCheck)){
             return passwordDiscord;
         }else{
-            return allOk;
+            return checkJoinOk;
+        }
+    }
+
+    public int checkCustomerRegist(String customerName){
+
+        if(customerName.length()<=0){
+            return customerNameError;
+        }else{
+            return checkCustomerRegistOk;
         }
     }
 }

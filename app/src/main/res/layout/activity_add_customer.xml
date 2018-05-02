@@ -15,15 +15,15 @@
         android:weightSum="2">
 
         <EditText
-            android:id="@+id/customer_name"
+            android:id="@+id/edit_customer_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/edit_text_background"
-            android:hint="고객명"
+            android:hint="＊고객명"
             android:maxLength="7"/>
         <EditText
-            android:id="@+id/customer_phone"
+            android:id="@+id/edit_customer_phone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -41,7 +41,7 @@
         android:layout_below="@id/layout">
 
         <EditText
-            android:id="@+id/customer_birth"
+            android:id="@+id/edit_customer_birth"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -49,16 +49,19 @@
             android:hint="생년월일YYMMDD"
             android:maxLength="6"/>
         <RadioGroup
+            android:id="@+id/radio_group_gender"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:gravity="center">
             <RadioButton
+                android:id="@+id/radio_button_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="남성" />
             <RadioButton
+                android:id="@+id/radio_button_female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="여성"
@@ -66,7 +69,7 @@
         </RadioGroup>
     </LinearLayout>
     <EditText
-        android:id="@+id/customer_address"
+        android:id="@+id/edit_customer_address"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_below="@id/layout_2"
@@ -78,11 +81,12 @@
         android:id="@+id/tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/customer_address"
+        android:layout_below="@id/edit_customer_address"
         android:text="고객 세부사항"
         android:textSize="30sp"
         android:layout_marginTop="8dp"/>
     <EditText
+        android:id="@+id/edit_customer_detail"
         android:layout_width="match_parent"
         android:layout_height="210dp"
         android:layout_below="@id/tv"
