@@ -31,6 +31,7 @@ public class FragmentCustomer extends Fragment {
     AdapterCustomer adapterCustomer;
 
     ImageView btnAdd;
+    ImageView btnRemove;
 
     CustomerDB db;
     String[][] readResult;
@@ -50,7 +51,9 @@ public class FragmentCustomer extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         btnAdd=view.findViewById(R.id.btn_add);
-        btnAdd.setOnClickListener(addBtnlistener);
+        btnRemove=view.findViewById(R.id.btn_delete);
+        btnAdd.setOnClickListener(btnAddlistener);
+        btnRemove.setOnClickListener(btnRemoveListener);
         return view;
     }
 
@@ -63,11 +66,20 @@ public class FragmentCustomer extends Fragment {
         recyclerView.setAdapter(adapterCustomer);
     }
 
-    View.OnClickListener addBtnlistener=new View.OnClickListener() {
+    View.OnClickListener btnAddlistener=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent intent=new Intent(view.getContext(), AddCustomer.class);
             startActivity(intent);
+        }
+    };
+
+    View.OnClickListener btnRemoveListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(AdapterCustomer.getPreTv()==null) return;
+            db.deleteByNo(Integer.parseInt(AdapterCustomer.getPreTv().getText().toString()));
+            onResume();
         }
     };
 
