@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by alfo06-25 on 2018-05-02.
  */
@@ -20,6 +22,7 @@ public class CustomerDB {
     String customerAddress;
     String customerDetail;
 
+    ArrayList<String[]> customerList=new ArrayList<>();
     String[][] readResult;
 
     private String dbName="customer.db";
@@ -47,7 +50,7 @@ public class CustomerDB {
         if(cursor==null) return;
 
         int cnt=cursor.getCount();
-        //readResult=new String[cnt][7];
+        readResult=new String[cnt][7];
         
 
         while (cursor.moveToNext()){
@@ -62,9 +65,9 @@ public class CustomerDB {
             Log.i("NO", "NO:"+no);
 
 
-//            for(int i=0; i<readResult[0].length; i++){
-//                readResult[no-1][i]=cursor.getString(i);
-//            }
+            for(int i=0; i<readResult[0].length; i++){
+                readResult[no-1][i]=cursor.getString(i);
+            }
         }
     }
 
