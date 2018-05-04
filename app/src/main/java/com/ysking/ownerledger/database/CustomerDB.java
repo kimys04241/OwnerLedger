@@ -47,9 +47,11 @@ public class CustomerDB {
         if(cursor==null) return;
 
         int cnt=cursor.getCount();
-        readResult=new String[cnt][7];
+        //readResult=new String[cnt][7];
+        
 
         while (cursor.moveToNext()){
+            int a=1;
             int no=cursor.getInt(0);
             String name=cursor.getString(1);
             String phone=cursor.getString(2);
@@ -59,9 +61,10 @@ public class CustomerDB {
             String detail=cursor.getString(6);
             Log.i("NO", "NO:"+no);
 
-            for(int i=0; i<readResult[0].length; i++){
-                readResult[no-1][i]=cursor.getString(i);
-            }
+
+//            for(int i=0; i<readResult[0].length; i++){
+//                readResult[no-1][i]=cursor.getString(i);
+//            }
         }
     }
 
