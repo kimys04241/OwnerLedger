@@ -3,6 +3,7 @@ package com.ysking.ownerledger.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.ysking.ownerledger.R;
 
+import java.util.ArrayList;
 
 
 /**
@@ -19,16 +21,16 @@ import com.ysking.ownerledger.R;
 public class AdapterCustomer extends RecyclerView.Adapter {
 
     Context context;
-    String[][] readResult;
+    ArrayList<String[]> customerList;
 
     private boolean headrFlag=false;
 
     private static TextView preTv;
     private static View preView;
 
-    public AdapterCustomer(Context context, String[][] readResult) {
+    public AdapterCustomer(Context context, ArrayList<String[]> customerList) {
         this.context = context;
-        this.readResult=readResult;
+        this.customerList=customerList;
     }
 
     @Override
@@ -70,10 +72,12 @@ public class AdapterCustomer extends RecyclerView.Adapter {
     }
 
     private void bodyBind(VH vh, int position){
-        vh.tvNo.setText(readResult[position-1][0]);
-        vh.tvName.setText(readResult[position-1][1]);
-        vh.tvPhone.setText(readResult[position-1][2]);
-        vh.tvBirth.setText(readResult[position-1][3]);
+        String[] customer=customerList.get(position-1);
+        vh.tvNo.setText(position+"");
+        vh.tvName.setText(customer[0]);
+        vh.tvPhone.setText(customer[1]);
+        vh.tvBirth.setText(customer[2]);
+        Log.i("TAG", "custoemr"+position+customer[0]+" "+customer[1]+" "+customer[2]);
     }
 
     @Override
@@ -83,7 +87,7 @@ public class AdapterCustomer extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return readResult.length+1;
+        return customerList.size()+1;
     }
 
     public static View getPreView() {

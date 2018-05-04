@@ -11,30 +11,42 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="4dp">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="?attr/actionBarSize"
-                    android:src="@drawable/logo"/>
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-
         <RelativeLayout
-            android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="16dp">
+            android:layout_weight="1">
+
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="?attr/actionBarSize"
+                        android:src="@drawable/logo"/>
+                </android.support.v7.widget.Toolbar>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ddd"
+                    android:background="#FFFFFF"
+                    android:visibility="gone"/>
+            </android.support.design.widget.AppBarLayout>
+
+            <RelativeLayout
+                android:id="@+id/fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize">
+            </RelativeLayout>
         </RelativeLayout>
+
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
@@ -43,14 +55,5 @@
             android:background="@color/colorWhite"
             android:elevation="4dp">
         </android.support.design.widget.TabLayout>
-
-
     </LinearLayout>
-
-
-
-
-
-
-
 </android.support.design.widget.CoordinatorLayout>

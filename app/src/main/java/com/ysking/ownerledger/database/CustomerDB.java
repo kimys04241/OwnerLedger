@@ -23,7 +23,7 @@ public class CustomerDB {
     String customerDetail;
 
     ArrayList<String[]> customerList=new ArrayList<>();
-    String[][] readResult;
+
 
     private String dbName="customer.db";
     private String tableName="customer";
@@ -35,7 +35,6 @@ public class CustomerDB {
 
     public CustomerDB(Context context) {
         this.context = context;
-
         db=context.openOrCreateDatabase(dbName, Context.MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE if not exists "+tableName+"(no integer primary key autoincrement,name text not null,phone text,birth text,gender text,address text,detail text);");
     }
@@ -43,18 +42,18 @@ public class CustomerDB {
     public void writeDB(String customerName, String customerPhone, String customerBirth, String customerGender, String customerAddress, String customerDetail){
         db.execSQL("insert into "+tableName+"(name,phone,birth,gender,address,detail) values('"+customerName+"','"+customerPhone+"','"+customerBirth+"','"+customerGender+"','"
         +customerAddress+"','"+customerDetail+"')");
+//        customerList.add(new String[]{customerName, customerPhone, customerBirth, customerGender, customerAddress, customerDetail});
     }
 
     public void readAllDB(){
         Cursor cursor=db.rawQuery("select * from "+tableName, null);
         if(cursor==null) return;
+        customerList.clear();
 
         int cnt=cursor.getCount();
-        readResult=new String[cnt][7];
-        
+
 
         while (cursor.moveToNext()){
-            int a=1;
             int no=cursor.getInt(0);
             String name=cursor.getString(1);
             String phone=cursor.getString(2);
@@ -62,12 +61,14 @@ public class CustomerDB {
             String gender=cursor.getString(4);
             String address=cursor.getString(5);
             String detail=cursor.getString(6);
-            Log.i("NO", "NO:"+no);
 
 
-            for(int i=0; i<readResult[0].length; i++){
-                readResult[no-1][i]=cursor.getString(i);
-            }
+            customerList.add(new String[]{cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6)});
+
+
+//            for(int i=0; i<readResult[0].length; i++){
+//                readResult[no-1][i]=cursor.getString(i);
+//            }
         }
     }
 
@@ -75,25 +76,24 @@ public class CustomerDB {
 //        for(int i=1; i<=readResult.length; i++){
 //            db.execSQL("delete from "+tableName+" where no=?", new String[]{i+""});
 //        }
-        int cnt=0;
-        if(readResult==null) return;
+
         db.execSQL("delete from "+tableName);
-        readResult[no-1]=null;
-        String[][] deleteResult=new String[readResult.length-1][7];
-        for(int i=0; i<readResult.length; i++){
-            if(readResult[i]==null) continue;
-            for(int j=0; j<7; j++){
-                deleteResult[cnt][j]=readResult[i][j];
-                cnt++;
-            }
+        customerList.remove(no-1);
+
+        Cursor cursor=db.rawQuery("select * from "+tableName, null);
+        if(cursor!=null) {
+            Log.i("CNT", "CNT:"+cursor.getCount());
+        }else{
+            Log.i("CNT", "CNT:null");
         }
-        readResult=deleteResult;
-        for(int i=0; i<readResult.length; i++){
-            writeDB(readResult[i][1], readResult[i][2], readResult[i][3], readResult[i][4], readResult[i][5], readResult[i][6]);
+
+        for(int i=0; i<customerList.size(); i++){
+            String[] customer=customerList.get(i);
+            writeDB(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]);
         }
     }
 
-    public String[][] getReadResult() {
-        return readResult;
+    public ArrayList<String[]> getCustomerList() {
+        return customerList;
     }
 }

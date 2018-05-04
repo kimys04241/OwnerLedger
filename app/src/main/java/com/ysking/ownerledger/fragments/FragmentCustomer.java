@@ -1,11 +1,14 @@
 package com.ysking.ownerledger.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,8 @@ import com.ysking.ownerledger.R;
 import com.ysking.ownerledger.activitys.AddCustomer;
 import com.ysking.ownerledger.adapter.AdapterCustomer;
 import com.ysking.ownerledger.database.CustomerDB;
+
+import java.util.ArrayList;
 
 /**
  * Created by alfo06-25 on 2018-05-01.
@@ -34,7 +39,7 @@ public class FragmentCustomer extends Fragment {
     ImageView btnRemove;
 
     CustomerDB db;
-    String[][] readResult;
+    ArrayList<String[]> customerList;
 
     @Nullable
     @Override
@@ -46,7 +51,7 @@ public class FragmentCustomer extends Fragment {
         apllyDB();
 
         recyclerView=view.findViewById(R.id.recycler);
-        adapterCustomer=new AdapterCustomer(view.getContext(), readResult);
+        adapterCustomer=new AdapterCustomer(view.getContext(), customerList);
         recyclerView.setAdapter(adapterCustomer);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -62,7 +67,7 @@ public class FragmentCustomer extends Fragment {
         super.onResume();
         apllyDB();
         //adapterCustomer.notifyDataSetChanged();
-        adapterCustomer=new AdapterCustomer(view.getContext(), readResult);
+        adapterCustomer=new AdapterCustomer(view.getContext(), customerList);
         recyclerView.setAdapter(adapterCustomer);
     }
 
@@ -78,14 +83,24 @@ public class FragmentCustomer extends Fragment {
         @Override
         public void onClick(View view) {
             if(AdapterCustomer.getPreTv()==null) return;
+            new AlertDialog.Builder(getContext()).setMessage(R.string.dialog_removecustomer).setPositiveButton("확인",dialogRemoveListner).setNegativeButton("취소", null).create().show();
+        }
+    };
+
+    DialogInterface.OnClickListener dialogRemoveListner=new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
             db.deleteByNo(Integer.parseInt(AdapterCustomer.getPreTv().getText().toString()));
+            Log.i("TAG", "TAG:"+Integer.parseInt(AdapterCustomer.getPreTv().getText().toString()));
             onResume();
         }
     };
 
+
+
     public void apllyDB(){
         db.readAllDB();
-        readResult=db.getReadResult();
+        customerList=db.getCustomerList();
     }
 
 
