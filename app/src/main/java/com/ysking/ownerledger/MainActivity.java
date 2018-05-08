@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     Toolbar toolbar;
-    TextView collapse;
+    TextView yearMonth;
 
     TabLayout tabLayout;
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar=findViewById(R.id.toolbar);
         tabLayout=findViewById(R.id.tab_layout);
-        collapse=findViewById(R.id.collapse);
+        yearMonth=findViewById(R.id.year_month);
 
         fragmentManager=getSupportFragmentManager();
 
@@ -55,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
 
         setTab();
         tabLayout.addOnTabSelectedListener(tabSelectedListener);
+    }
+
+    public void clickYearMonth(View v){
+
     }
 
     @Override
@@ -134,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         currentFragment=fragmentHome;
         transaction.add(R.id.fragment, fragmentHome);
         transaction.commit();
-        collapse.setVisibility(View.GONE);
+        yearMonth.setVisibility(View.GONE);
     }
 
     public void inflateCustomerFragment(){
@@ -145,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         currentFragment=fragmentCustomer;
         transaction.add(R.id.fragment, fragmentCustomer);
         transaction.commit();
-        collapse.setVisibility(View.GONE);
+        yearMonth.setVisibility(View.GONE);
     }
 
     public void inflateDialyFragment(){
@@ -156,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         currentFragment=fragmentDaily;
         transaction.add(R.id.fragment, fragmentDaily);
         transaction.commit();
-        collapse.setVisibility(View.VISIBLE);
+        yearMonth.setVisibility(View.VISIBLE);
 
     }
 }

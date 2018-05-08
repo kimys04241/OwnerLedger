@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".IntroActivity"
-            android:theme="@style/AppThemeNoActionbar">
+            android:theme="@style/AppThemeNoActionbar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,12 +21,19 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppThemeNoActionbar" />
+            android:theme="@style/AppThemeNoActionbar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".user.information.AppFristRun"
-            android:theme="@style/AppThemeNoActionbar" />
-        <activity android:name=".activitys.AddCustomer" />
-        <activity android:name=".activitys.ActivityAddDaily"></activity>
+            android:theme="@style/AppThemeNoActionbar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.AddCustomer"
+            android:theme="@style/AppThemeNoActionbar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activitys.ActivityAddDaily"
+            android:theme="@style/AppThemeNoActionbar"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

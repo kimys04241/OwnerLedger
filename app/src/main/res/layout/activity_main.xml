@@ -34,13 +34,15 @@
                         android:src="@drawable/logo"/>
                 </android.support.v7.widget.Toolbar>
                 <TextView
-                    android:id="@+id/collapse"
+                    android:id="@+id/year_month"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:text="YYYY-MM"
                     android:gravity="center"
                     android:textSize="20sp"
-                    android:alpha="0.9" />
+                    android:alpha="0.9"
+                    android:clickable="true"
+                    android:onClick="clickYearMonth"/>
             </android.support.design.widget.AppBarLayout>
 
             <RelativeLayout

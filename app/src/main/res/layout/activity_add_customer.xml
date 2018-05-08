@@ -7,12 +7,21 @@
     tools:context=".activitys.AddCustomer"
     android:padding="16dp">
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:text="고객추가"
+        android:gravity="center"
+        android:textSize="40sp"/>
+
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:layout_below="@id/title">
 
         <EditText
             android:id="@+id/edit_customer_name"

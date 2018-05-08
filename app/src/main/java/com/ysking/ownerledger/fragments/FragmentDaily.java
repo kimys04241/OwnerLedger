@@ -2,6 +2,7 @@ package com.ysking.ownerledger.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,13 +11,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.ysking.ownerledger.R;
+import com.ysking.ownerledger.dialog.DialogDatePicker;
 
 public class FragmentDaily extends Fragment{
+
+
 
     RecyclerView recyclerView;
     Button btnModify;
     Button btnWrite;
     Button btnDelete;
+
 
     @Nullable
     @Override
@@ -26,7 +31,7 @@ public class FragmentDaily extends Fragment{
         btnModify=view.findViewById(R.id.btn_inside_daily_modify);
         btnWrite=view.findViewById(R.id.btn_inside_daily_write);
         btnDelete=view.findViewById(R.id.btn_inside_daily_delete);
-
+        btnWrite.setOnClickListener(btnDailyListener);
         return view;
 
     }
@@ -40,6 +45,7 @@ public class FragmentDaily extends Fragment{
                 case R.id.btn_inside_daily_modify:
                     break;
                 case R.id.btn_inside_daily_write:
+                    btnWriteBehavior();
                     break;
                 case R.id.btn_inside_daily_delete:
                     break;
@@ -48,6 +54,7 @@ public class FragmentDaily extends Fragment{
     };
 
     public void btnWriteBehavior(){
-
+        DialogFragment datePicker=new DialogDatePicker();
+        datePicker.show(getFragmentManager(),"date picker");
     }
 }
