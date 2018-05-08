@@ -56,5 +56,6 @@ public class FragmentDaily extends Fragment{
     public void btnWriteBehavior(){
         DialogFragment datePicker=new DialogDatePicker();
         datePicker.show(getFragmentManager(),"date picker");
+        
     }
 }
