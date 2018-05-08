@@ -19,12 +19,14 @@
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="4dp">
+                android:elevation="4dp"
+                android:background="@color/collapse">
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize">
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorPrimary">
 
                     <ImageView
                         android:layout_width="100dp"
@@ -32,11 +34,13 @@
                         android:src="@drawable/logo"/>
                 </android.support.v7.widget.Toolbar>
                 <TextView
+                    android:id="@+id/collapse"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ddd"
-                    android:background="#FFFFFF"
-                    android:visibility="gone"/>
+                    android:layout_height="30dp"
+                    android:text="YYYY-MM"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:alpha="0.9" />
             </android.support.design.widget.AppBarLayout>
 
             <RelativeLayout

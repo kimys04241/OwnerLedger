@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="YYYY-MM-DD"
-        android:textSize="16sp"
+        android:textSize="25sp"
         android:textColor="@color/colorBlack"
         android:layout_below="@id/divide_1"
         android:gravity="center" />

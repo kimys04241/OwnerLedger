@@ -12,8 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.ysking.ownerledger.fragments.FragmentCustomer;
+import com.ysking.ownerledger.fragments.FragmentDaily;
 import com.ysking.ownerledger.fragments.FragmentHome;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     Toolbar toolbar;
+    TextView collapse;
 
     TabLayout tabLayout;
 
@@ -28,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String home="Home";
     public static final String customer="Customer";
-    public static final String edit="Edit";
+    public static final String daily="Daily";
     public static final String chart="Chart";
     public static final String board="Board";
 
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar=findViewById(R.id.toolbar);
         tabLayout=findViewById(R.id.tab_layout);
+        collapse=findViewById(R.id.collapse);
 
         fragmentManager=getSupportFragmentManager();
 
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     public void setTab(){
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_home_black_24dp).setTag(home));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_people_black_24dp).setTag(customer));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_edit_black_24dp).setTag(edit));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_edit_black_24dp).setTag(daily));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_pie_chart_black_24dp).setTag(chart));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_content_paste_black_24dp).setTag(board));
     }
@@ -100,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 case customer:
                     inflateCustomerFragment();
                     break;
-                case edit:
+                case daily:
+                    inflateDialyFragment();
                     break;
                 case chart:
                     break;
@@ -129,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         currentFragment=fragmentHome;
         transaction.add(R.id.fragment, fragmentHome);
         transaction.commit();
+        collapse.setVisibility(View.GONE);
     }
 
     public void inflateCustomerFragment(){
@@ -139,5 +145,18 @@ public class MainActivity extends AppCompatActivity {
         currentFragment=fragmentCustomer;
         transaction.add(R.id.fragment, fragmentCustomer);
         transaction.commit();
+        collapse.setVisibility(View.GONE);
+    }
+
+    public void inflateDialyFragment(){
+        toolbar.setTitle("일별장부");
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        if(currentFragment!=null) transaction.remove(currentFragment);
+        FragmentDaily fragmentDaily=new FragmentDaily();
+        currentFragment=fragmentDaily;
+        transaction.add(R.id.fragment, fragmentDaily);
+        transaction.commit();
+        collapse.setVisibility(View.VISIBLE);
+
     }
 }

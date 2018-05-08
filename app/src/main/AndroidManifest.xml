@@ -18,9 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:theme="@style/AppThemeNoActionbar" />
-        <activity android:name=".user.information.AppFristRun" android:theme="@style/AppThemeNoActionbar"/>
-        <activity android:name=".activitys.AddCustomer"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppThemeNoActionbar" />
+        <activity
+            android:name=".user.information.AppFristRun"
+            android:theme="@style/AppThemeNoActionbar" />
+        <activity android:name=".activitys.AddCustomer" />
+        <activity android:name=".activitys.ActivityAddDaily"></activity>
     </application>
 
 </manifest>
