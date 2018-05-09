@@ -4,6 +4,7 @@ public class DateManager {
 
     private static String today;
     private static String checkedDate;
+    private static String datePicker;
 
     public static int[] getToday() {
         String[] todaySplit=today.split("-");
@@ -25,5 +26,14 @@ public class DateManager {
         DateManager.checkedDate = chcekedDate;
     }
 
+    public static void setDatePicker(String datePicker){
+        DateManager.datePicker=datePicker;
+    }
+
+    public static int[] getDatePicker(){
+        String[] datePickerSplit=datePicker.split("-");
+        int[] datePickerInt={Integer.parseInt(datePickerSplit[0]), Integer.parseInt(datePickerSplit[1]), Integer.parseInt(datePickerSplit[2])};
+        return datePickerInt;
+    }
 
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ysking.ownerledger.MainActivity">
+    tools:context="com.ysking.ownerledger.MainActivity"
+    android:id="@+id/container">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                     android:id="@+id/year_month"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:text="YYYY-MM"
+                    android:text="YYYY-MM-DD"
                     android:gravity="center"
                     android:textSize="20sp"
                     android:alpha="0.9"

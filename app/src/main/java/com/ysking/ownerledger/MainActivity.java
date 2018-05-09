@@ -15,20 +15,26 @@ import android.widget.DatePicker;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.ysking.ownerledger.date.DateManager;
 import com.ysking.ownerledger.fragments.FragmentCustomer;
 import com.ysking.ownerledger.fragments.FragmentDaily;
+import com.ysking.ownerledger.fragments.FragmentDatepicker;
 import com.ysking.ownerledger.fragments.FragmentHome;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
 
     Toolbar toolbar;
-    TextView yearMonth;
+    TextView yearMonthDate;
 
     TabLayout tabLayout;
 
     Fragment currentFragment;
+
+    FragmentDatepicker fragmentDatepicker;
 
     public static final String home="Home";
     public static final String customer="Customer";
@@ -45,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar=findViewById(R.id.toolbar);
         tabLayout=findViewById(R.id.tab_layout);
-        yearMonth=findViewById(R.id.year_month);
+        yearMonthDate=findViewById(R.id.year_month);
 
         fragmentManager=getSupportFragmentManager();
 
@@ -59,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickYearMonth(View v){
-
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        fragmentDatepicker=new FragmentDatepicker();
+        transaction.add(R.id.container,fragmentDatepicker);
+        transaction.commit();
     }
 
     @Override
@@ -139,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         currentFragment=fragmentHome;
         transaction.add(R.id.fragment, fragmentHome);
         transaction.commit();
-        yearMonth.setVisibility(View.GONE);
+        yearMonthDate.setVisibility(View.GONE);
     }
 
     public void inflateCustomerFragment(){
@@ -150,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         currentFragment=fragmentCustomer;
         transaction.add(R.id.fragment, fragmentCustomer);
         transaction.commit();
-        yearMonth.setVisibility(View.GONE);
+        yearMonthDate.setVisibility(View.GONE);
     }
 
     public void inflateDialyFragment(){
@@ -161,7 +170,21 @@ public class MainActivity extends AppCompatActivity {
         currentFragment=fragmentDaily;
         transaction.add(R.id.fragment, fragmentDaily);
         transaction.commit();
-        yearMonth.setVisibility(View.VISIBLE);
-
+        yearMonthDate.setVisibility(View.VISIBLE);
+        int[] today= DateManager.getToday();
+        yearMonthDate.setText(String.format("%d-%02d-%02d", today[0], today[1], today[2]));
     }
+
+    public void setDatePickerResult(){
+
+        int[] datePicker=DateManager.getDatePicker();
+        yearMonthDate.setText(String.format("%d-%02d-%02d", datePicker[0], datePicker[1], datePicker[2]));
+    }
+
+    public void destroyFragmentDatepicker(){
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        if(fragmentDatepicker!=null) transaction.remove(fragmentDatepicker);
+        transaction.commit();
+    }
+
 }
