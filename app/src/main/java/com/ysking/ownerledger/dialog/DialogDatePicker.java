@@ -29,7 +29,7 @@ public class DialogDatePicker extends DialogFragment {
         int date=today[2];
 
 
-        return new DatePickerDialog(getContext(), onDateSetListener, year, month, date);
+        return new DatePickerDialog(getContext(), onDateSetListener, year, month-1, date);
     }
 
     private DatePickerDialog.OnDateSetListener onDateSetListener=new DatePickerDialog.OnDateSetListener() {

@@ -17,9 +17,12 @@ public class DateManager {
     }
 
     public static int[] getCheckedDate() {
-        String[] checkedDateSplit=checkedDate.split("-");
-        int[] checkDateSplit={Integer.parseInt(checkedDateSplit[0]), Integer.parseInt(checkedDateSplit[1]), Integer.parseInt(checkedDateSplit[2])};
-        return checkDateSplit;
+        if(checkedDate!=null){
+            String[] checkedDateSplit=checkedDate.split("-");
+            int[] checkDateSplit={Integer.parseInt(checkedDateSplit[0]), Integer.parseInt(checkedDateSplit[1]), Integer.parseInt(checkedDateSplit[2])};
+            return checkDateSplit;
+        }
+        return null;
     }
 
     public static void setChcekedDate(String chcekedDate) {

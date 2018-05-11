@@ -64,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(tabSelectedListener);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(DateManager.getCheckedDate()!=null){
+            int[] checkedDate=DateManager.getCheckedDate();
+            String setDate=String.format("%d-%02d-%02d", checkedDate[0], checkedDate[1], checkedDate[2]);
+            yearMonthDate.setText(setDate);
+        }
+    }
+
     public void clickYearMonth(View v){
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         fragmentDatepicker=new FragmentDatepicker();

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 
 import com.ysking.ownerledger.R;
+import com.ysking.ownerledger.database.DailyDB;
 import com.ysking.ownerledger.date.DateManager;
 import com.ysking.ownerledger.fragments.FragmentPurchase;
 import com.ysking.ownerledger.fragments.FragmentSales;
@@ -29,10 +30,15 @@ public class ActivityAddDaily extends AppCompatActivity {
 
     int[] checkedDate;
 
+    DailyDB dailyDB;
+    String[] values;
+    String division;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_daily);
+
+        dailyDB=new DailyDB(this);
 
         fragmentManager=getSupportFragmentManager();
         checkedDate= DateManager.getCheckedDate();
@@ -48,26 +54,22 @@ public class ActivityAddDaily extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        dailyDB.createTable();
+        dailyDB.insertTable(division, values);
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
 
-    RadioGroup.OnCheckedChangeListener onCheckedChangeListener=new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-            int radioId=radioGroup.getCheckedRadioButtonId();
+    public void setValues(String[] values){
+        this.values=values;
+    }
 
-            switch (radioId){
-                case R.id.radio_button_sales:
-                    inflateSalesFragment();
-                    break;
-                case R.id.radio_button_purchase:
-                    inflatePurchaseFragment();
-                    break;
-            }
-        }
-    };
 
     public void inflateSalesFragment(){
         FragmentTransaction transaction=fragmentManager.beginTransaction();
@@ -86,6 +88,25 @@ public class ActivityAddDaily extends AppCompatActivity {
         transaction.add(R.id.fragment, fragmentPurchase);
         transaction.commit();
     }
+
+    RadioGroup.OnCheckedChangeListener onCheckedChangeListener=new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            int radioId=radioGroup.getCheckedRadioButtonId();
+
+            switch (radioId){
+                case R.id.radio_button_sales:
+                    inflateSalesFragment();
+                    division="매출";
+                    break;
+                case R.id.radio_button_purchase:
+                    inflatePurchaseFragment();
+                    division="매입";
+                    break;
+            }
+        }
+    };
+
 
 
 

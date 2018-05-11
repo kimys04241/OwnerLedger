@@ -9,31 +9,49 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.ysking.ownerledger.R;
+import com.ysking.ownerledger.adapter.AdapterDaily;
+import com.ysking.ownerledger.dailydata.DailyData;
+import com.ysking.ownerledger.database.DailyDB;
 import com.ysking.ownerledger.dialog.DialogDatePicker;
 
 public class FragmentDaily extends Fragment{
 
 
 
-    RecyclerView recyclerView;
+    ListView listView;
     Button btnModify;
     Button btnWrite;
     Button btnDelete;
+
+    DailyDB dailyDB;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_daily, container, false);
-        recyclerView=view.findViewById(R.id.recycler_inside_daily);
+        listView=view.findViewById(R.id.listview_inside_daily);
         btnModify=view.findViewById(R.id.btn_inside_daily_modify);
         btnWrite=view.findViewById(R.id.btn_inside_daily_write);
         btnDelete=view.findViewById(R.id.btn_inside_daily_delete);
         btnWrite.setOnClickListener(btnDailyListener);
+        dailyDB=new DailyDB(getContext());
+
         return view;
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(dailyDB.getDailyData()!=null){
+            DailyData dailyData=dailyDB.getDailyData();
+            AdapterDaily adapterDaily=new AdapterDaily(getContext(), getLayoutInflater(), dailyData);
+            listView.setAdapter(adapterDaily);
+        }
     }
 
     View.OnClickListener btnDailyListener=new View.OnClickListener() {
