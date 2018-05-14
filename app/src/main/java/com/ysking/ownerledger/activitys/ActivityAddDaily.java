@@ -31,7 +31,6 @@ public class ActivityAddDaily extends AppCompatActivity {
     int[] checkedDate;
 
     DailyDB dailyDB;
-    String[] values;
     String division;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +55,9 @@ public class ActivityAddDaily extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        dailyDB.createTable();
-        dailyDB.insertTable(division, values);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
 
-    public void setValues(String[] values){
-        this.values=values;
-    }
 
 
     public void inflateSalesFragment(){

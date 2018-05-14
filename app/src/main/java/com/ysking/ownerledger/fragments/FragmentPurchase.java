@@ -6,9 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.ysking.ownerledger.R;
+import com.ysking.ownerledger.activitys.ActivityAddDaily;
+import com.ysking.ownerledger.dailydata.DailyData;
+import com.ysking.ownerledger.database.DailyDB;
+import com.ysking.ownerledger.date.DateManager;
 
 /**
  * Created by alfo06-25 on 2018-05-08.
@@ -21,6 +26,7 @@ public class FragmentPurchase extends Fragment {
     EditText editClassification;
     EditText editConnection;
     EditText editMemo;
+    Button btnCheck;
 
     @Nullable
     @Override
@@ -32,7 +38,29 @@ public class FragmentPurchase extends Fragment {
         editClassification=view.findViewById(R.id.edit_purchase_classification);
         editConnection=view.findViewById(R.id.edit_purchase_connection);
         editMemo=view.findViewById(R.id.edit_purchase_memo);
+        btnCheck=view.findViewById(R.id.btn_fragment_purchase_check);
+        btnCheck.setOnClickListener(onClickListener);
 
         return view;
+    }
+
+    View.OnClickListener onClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            passDailyData();
+        }
+    };
+
+    public void passDailyData(){
+
+        int[] split= DateManager.getCheckedDate();
+        String date=String.format("%d-%02d-%02d", split[0], split[1], split[2]);
+        DailyData dailyData=new DailyData(date, "매입", editPurchase.getText().toString(), editCategory.getText().toString(), editClassification.getText().toString()
+                , editConnection.getText().toString(), editMemo.getText().toString());
+        DailyDB dailyDB=new DailyDB(getContext());
+        dailyDB.createTable(date);
+        dailyDB.insertData(dailyData);
+        ActivityAddDaily activityAddDaily=(ActivityAddDaily) getActivity();
+        activityAddDaily.finish();
     }
 }

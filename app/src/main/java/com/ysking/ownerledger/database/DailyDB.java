@@ -21,8 +21,11 @@ public class DailyDB {
     String tableName;
 
     static SQLiteDatabase db;
-    DailyData dailyData;
 
+    public static int cursorNull=0;
+    public static int cursorNotNull=1;
+
+    ArrayList<DailyData> dataList;
 
     public DailyDB(Context context) {
         this.context = context;
@@ -30,46 +33,37 @@ public class DailyDB {
 
     }
 
-    public void createTable(){
+    public void createTable(String date){
 
-        int[] checkedDate=DateManager.getCheckedDate();
-        tableName=String.format("table_%d_%02d_%02d", checkedDate[0], checkedDate[1], checkedDate[2]);
+        tableName=tableNameTransfer(date);
         db.execSQL("CREATE TABLE if not exists "+tableName+"(no integer primary key autoincrement,division text not null,sales text,category text,classification text," +
                 "connection text,memo text);");
     }
 
-    public void insertTable(String division, String[] values){
-        db.execSQL("insert into "+tableName+"(division,sales,category,classification,connection,memo) values('"+division+"','"+values[0]+"','"+values[1]+"','"+values[2]
-                +"','"+values[3]+"','"+values[4]+"')");
+    public void insertData(DailyData dailyData){
+        db.execSQL("insert into "+tableName+"(division,sales,category,classification,connection,memo) values('"
+                +dailyData.getDivision()+"','"+dailyData.getSales()
+                +"','"+dailyData.getCategory()+"','"+dailyData.getClassification()
+                +"','"+dailyData.getConnection()+"','"+dailyData.getMemo()+"')");
     }
 
-    public void selectByTableName(String date){
+    public int selectByTableName(String date){
 
-        String tableName=tableNameTransfer(date);
+        tableName=tableNameTransfer(date);
 
         Cursor cursor=db.rawQuery("select * from "+tableName, null);
-        if(cursor==null) return;
-        dailyData=new DailyData();
-
+        if(cursor==null) return cursorNull;
         int cnt=cursor.getCount();
-        dailyData.setCnt(cnt);
 
-        ArrayList<String[]> salesData=new ArrayList<>();
-        ArrayList<String[]> purchaseData=new ArrayList<>();
-
+        dataList=new ArrayList<>();
         while (cursor.moveToNext()){
-            String division=cursor.getString(1);
-            switch (division){
-                case "매출":
-                    salesData.add(new String[]{cursor.getInt(0)+"", cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5)});
-                    break;
-                case "매입":
-                    purchaseData.add(new String[]{cursor.getInt(0)+"", cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5)});
-                    break;
-            }
+            dataList.add(new DailyData(date, cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6)));
         }
-        dailyData.setSalesData(salesData);
-        dailyData.setPurchaseData(purchaseData);
+        return cursorNotNull;
+    }
+
+    public ArrayList<DailyData> getDataList(){
+     return dataList;
     }
 
     public String tableNameTransfer(String date){
@@ -77,7 +71,4 @@ public class DailyDB {
         return "table_"+split[0]+"_"+split[1]+"_"+split[2];
     }
 
-    public DailyData getDailyData() {
-        return dailyData;
-    }
 }

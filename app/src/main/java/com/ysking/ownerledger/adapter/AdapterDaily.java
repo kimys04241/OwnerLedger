@@ -2,6 +2,7 @@ package com.ysking.ownerledger.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,33 +22,25 @@ public class AdapterDaily extends BaseAdapter {
 
     Context context;
     LayoutInflater inflater;
-    DailyData dailyData;
-    ArrayList<String[]> salesData;
-    ArrayList<String[]> purchaseData;
-    int cnt;
+    ArrayList<DailyData> dataList;
 
-    public AdapterDaily(Context context, LayoutInflater inflater, DailyData dailyData) {
+
+    public AdapterDaily(Context context, LayoutInflater inflater, ArrayList<DailyData> dataList) {
         this.context = context;
         this.inflater=inflater;
-        this.dailyData = dailyData;
-        salesData=dailyData.getSalesData();
-        purchaseData=dailyData.getPurchaseData();
-        cnt=dailyData.getCnt();
+        this.dataList=dataList;
+
+
     }
 
     @Override
     public int getCount() {
-        return cnt;
+        return dataList.size();
     }
 
     @Override
     public Object getItem(int position) {
-      if(salesData.size()<=position+1){
-          return salesData.get(position);
-      }else{
-          return purchaseData.get(position-salesData.size());
-      }
-
+        return dataList.get(position);
     }
 
     @Override
@@ -61,17 +54,13 @@ public class AdapterDaily extends BaseAdapter {
         if(view==null){
             view=inflater.inflate(R.layout.list_item_inside_daily, viewGroup, false);
         }
-
+        
         TextView tv=view.findViewById(R.id.list_item_tv);
-        String[] data;
-        if(salesData.size()<=position){
-            data=salesData.get(position);
-            tv.setBackgroundColor(Color.RED);
-        }else{
-            data=purchaseData.get(position-salesData.size());
-            tv.setBackgroundColor(Color.BLUE);
-        }
-        String s=data[3]+":"+data[2];
+        DailyData dailyData=dataList.get(position);
+        tv.setText(dailyData.getDivision()+":"+dailyData.getSales());
+        if(dailyData.getDivision().equals("매출")) tv.setBackgroundColor(Color.RED);
+        else tv.setBackgroundColor(Color.BLUE);
         return view;
+
     }
 }

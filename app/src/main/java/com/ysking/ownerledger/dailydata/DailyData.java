@@ -7,33 +7,78 @@ import java.util.ArrayList;
  */
 
 public class DailyData {
+    String date;
 
-    int cnt;
+    String division;
+    String sales;
+    String category;
+    String classification;
+    String connection;
+    String memo;
 
-    ArrayList<String[]> salesData;
-    ArrayList<String[]> purchaseData;
-
-    public int getCnt() {
-        return cnt;
+    public DailyData(String date, String division, String sales, String category, String classification, String connection, String memo) {
+        this.date = date;
+        this.division = division;
+        this.sales = sales;
+        this.category = category;
+        this.classification = classification;
+        this.connection = connection;
+        this.memo = memo;
     }
 
-    public void setCnt(int cnt) {
-        this.cnt = cnt;
+    public String getDate() {
+        return date;
     }
 
-    public ArrayList<String[]> getSalesData() {
-        return salesData;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public void setSalesData(ArrayList<String[]> salesData) {
-        this.salesData = salesData;
+    public String getDivision() {
+        return division;
     }
 
-    public ArrayList<String[]> getPurchaseData() {
-        return purchaseData;
+    public void setDivision(String division) {
+        this.division = division;
     }
 
-    public void setPurchaseData(ArrayList<String[]> purchaseData) {
-        this.purchaseData = purchaseData;
+    public String getSales() {
+        return sales;
+    }
+
+    public void setSales(String sales) {
+        this.sales = sales;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setClassification(String classification) {
+        this.classification = classification;
+    }
+
+    public String getConnection() {
+        return connection;
+    }
+
+    public void setConnection(String connection) {
+        this.connection = connection;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

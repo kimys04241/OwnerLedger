@@ -182,7 +182,9 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
         yearMonthDate.setVisibility(View.VISIBLE);
         int[] today= DateManager.getToday();
-        yearMonthDate.setText(String.format("%d-%02d-%02d", today[0], today[1], today[2]));
+        String chcekedDate=String.format("%d-%02d-%02d", today[0], today[1], today[2]);
+        DateManager.setChcekedDate(chcekedDate);
+        yearMonthDate.setText(chcekedDate);
     }
 
     public void setDatePickerResult(){
@@ -192,6 +194,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void destroyFragmentDatepicker(){
+        FragmentDaily fragmentDaily=(FragmentDaily) currentFragment;
+        fragmentDaily.setListView();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         if(fragmentDatepicker!=null) transaction.remove(fragmentDatepicker);
         transaction.commit();

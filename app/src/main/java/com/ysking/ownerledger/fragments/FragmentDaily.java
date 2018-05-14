@@ -15,7 +15,10 @@ import com.ysking.ownerledger.R;
 import com.ysking.ownerledger.adapter.AdapterDaily;
 import com.ysking.ownerledger.dailydata.DailyData;
 import com.ysking.ownerledger.database.DailyDB;
+import com.ysking.ownerledger.date.DateManager;
 import com.ysking.ownerledger.dialog.DialogDatePicker;
+
+import java.util.ArrayList;
 
 public class FragmentDaily extends Fragment{
 
@@ -26,8 +29,8 @@ public class FragmentDaily extends Fragment{
     Button btnWrite;
     Button btnDelete;
 
-    DailyDB dailyDB;
-
+    DailyDB db;
+    AdapterDaily adapterDaily;
 
     @Nullable
     @Override
@@ -38,18 +41,24 @@ public class FragmentDaily extends Fragment{
         btnWrite=view.findViewById(R.id.btn_inside_daily_write);
         btnDelete=view.findViewById(R.id.btn_inside_daily_delete);
         btnWrite.setOnClickListener(btnDailyListener);
-        dailyDB=new DailyDB(getContext());
-
+        db=new DailyDB(getContext());
+        setListView();
         return view;
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(dailyDB.getDailyData()!=null){
-            DailyData dailyData=dailyDB.getDailyData();
-            AdapterDaily adapterDaily=new AdapterDaily(getContext(), getLayoutInflater(), dailyData);
+        setListView();
+    }
+
+    public void setListView(){
+        int[] checkedDate= DateManager.getCheckedDate();
+        String date=String.format("%d-%02d-%02d", checkedDate[0], checkedDate[1], checkedDate[2]);
+        db.createTable(date);
+        if(db.selectByTableName(date)!=DailyDB.cursorNull){
+            ArrayList<DailyData> dataList=db.getDataList();
+            adapterDaily=new AdapterDaily(getContext(), getLayoutInflater(), dataList);
             listView.setAdapter(adapterDaily);
         }
     }

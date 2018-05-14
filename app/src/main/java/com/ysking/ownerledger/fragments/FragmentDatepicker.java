@@ -47,9 +47,11 @@ public class FragmentDatepicker extends Fragment {
         @Override
         public void onClick(View view) {
             DateManager.setDatePicker(datePicker.getYear()+"-"+(datePicker.getMonth()+1)+"-"+datePicker.getDayOfMonth());
+            DateManager.setChcekedDate(datePicker.getYear()+"-"+(datePicker.getMonth()+1)+"-"+datePicker.getDayOfMonth());
             MainActivity mainActivity=(MainActivity) getActivity();
             mainActivity.setDatePickerResult();
             mainActivity.destroyFragmentDatepicker();
+
         }
     };
 
