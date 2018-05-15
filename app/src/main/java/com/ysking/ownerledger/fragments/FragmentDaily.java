@@ -1,5 +1,6 @@
 package com.ysking.ownerledger.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -8,8 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.ysking.ownerledger.R;
 import com.ysking.ownerledger.adapter.AdapterDaily;
@@ -32,15 +35,22 @@ public class FragmentDaily extends Fragment{
     DailyDB db;
     AdapterDaily adapterDaily;
 
+    View preView;
+
+    boolean clicked=true;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_daily, container, false);
         listView=view.findViewById(R.id.listview_inside_daily);
+        listView.setOnItemClickListener(onItemClickListener);
         btnModify=view.findViewById(R.id.btn_inside_daily_modify);
         btnWrite=view.findViewById(R.id.btn_inside_daily_write);
         btnDelete=view.findViewById(R.id.btn_inside_daily_delete);
+        btnModify.setOnClickListener(btnDailyListener);
         btnWrite.setOnClickListener(btnDailyListener);
+        btnDelete.setOnClickListener(btnDailyListener);
         db=new DailyDB(getContext());
         setListView();
         return view;
@@ -85,4 +95,44 @@ public class FragmentDaily extends Fragment{
         datePicker.show(getFragmentManager(),"date picker");
 
     }
+
+    AdapterView.OnItemClickListener onItemClickListener=new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            if(preView!=view){
+                if(preView!=null){
+                    DailyData dailyData=(DailyData)preView.getTag();
+                    switch (dailyData.getDivision()){
+                        case DailyData.divisionSales:
+                            preView.setBackgroundColor(Color.RED);
+                            break;
+                        case DailyData.divisionPurchase:
+                            preView.setBackgroundColor(Color.BLUE);
+                            break;
+                    }
+                }
+                preView=view;
+                view.setBackgroundColor(Color.LTGRAY);
+            }
+//            else{
+//                if(clicked){
+//                    switch ((int)view.getTag()){
+//                        case AdapterDaily.tagSales:
+//                            view.setBackgroundColor(Color.RED);
+//                            clicked=!clicked;
+//                            break;
+//                        case AdapterDaily.tagPurchase:
+//                            view.setBackgroundColor(Color.BLUE);
+//                            clicked=!clicked;
+//                            break;
+//                    }
+//                }else{
+//                    view.setBackgroundColor(Color.LTGRAY);
+//                    clicked=!clicked;
+//                }
+//
+//            }
+
+        }
+    };
 }

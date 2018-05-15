@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class DailyData {
     String date;
 
+    int no;
     String division;
     String sales;
     String category;
@@ -16,7 +17,20 @@ public class DailyData {
     String connection;
     String memo;
 
+    public static final String divisionSales="매출";
+    public static final String divisionPurchase="매입";
+
     public DailyData(String date, String division, String sales, String category, String classification, String connection, String memo) {
+        this.date = date;
+        this.division = division;
+        this.sales = sales;
+        this.category = category;
+        this.classification = classification;
+        this.connection = connection;
+        this.memo = memo;
+    }
+
+    public DailyData(int no, String date, String division, String sales, String category, String classification, String connection, String memo) {
         this.date = date;
         this.division = division;
         this.sales = sales;

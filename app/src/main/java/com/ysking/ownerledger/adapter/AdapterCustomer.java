@@ -143,7 +143,5 @@ public class AdapterCustomer extends RecyclerView.Adapter {
                 tvNo.setTextColor(Color.RED);
             }
         };
-
-
     }
 }

@@ -57,7 +57,7 @@ public class DailyDB {
 
         dataList=new ArrayList<>();
         while (cursor.moveToNext()){
-            dataList.add(new DailyData(date, cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6)));
+            dataList.add(new DailyData(cursor.getInt(0), date, cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6)));
         }
         return cursorNotNull;
     }

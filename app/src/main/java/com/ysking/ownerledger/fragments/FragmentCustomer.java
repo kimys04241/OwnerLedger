@@ -91,7 +91,6 @@ public class FragmentCustomer extends Fragment {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
             db.deleteByNo(Integer.parseInt(AdapterCustomer.getPreTv().getText().toString()));
-            Log.i("TAG", "TAG:"+Integer.parseInt(AdapterCustomer.getPreTv().getText().toString()));
             onResume();
         }
     };

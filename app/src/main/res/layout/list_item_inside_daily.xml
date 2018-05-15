@@ -10,5 +10,5 @@
         android:layout_height="match_parent"
         android:text="항목:"
         android:textSize="30sp"
-        android:gravity="center_vertical"/>
+        android:gravity="center_vertical" />
 </RelativeLayout>

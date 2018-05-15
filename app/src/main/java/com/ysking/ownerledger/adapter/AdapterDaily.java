@@ -25,6 +25,9 @@ public class AdapterDaily extends BaseAdapter {
     ArrayList<DailyData> dataList;
 
 
+
+
+
     public AdapterDaily(Context context, LayoutInflater inflater, ArrayList<DailyData> dataList) {
         this.context = context;
         this.inflater=inflater;
@@ -58,9 +61,15 @@ public class AdapterDaily extends BaseAdapter {
         TextView tv=view.findViewById(R.id.list_item_tv);
         DailyData dailyData=dataList.get(position);
         tv.setText(dailyData.getDivision()+":"+dailyData.getSales());
-        if(dailyData.getDivision().equals("매출")) tv.setBackgroundColor(Color.RED);
-        else tv.setBackgroundColor(Color.BLUE);
+        if(dailyData.getDivision().equals(DailyData.divisionSales)){
+            view.setBackgroundColor(Color.RED);
+            view.setTag(dailyData);
+        }
+        else{
+            view.setBackgroundColor(Color.BLUE);
+            view.setTag(dailyData);
+        }
         return view;
-
     }
+
 }
