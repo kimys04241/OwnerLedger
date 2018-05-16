@@ -195,7 +195,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void destroyFragmentDatepicker(){
         FragmentDaily fragmentDaily=(FragmentDaily) currentFragment;
-        fragmentDaily.setListView();
+        //fragmentDaily.setListView();
+        fragmentDaily.setRecyclerAdapter();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         if(fragmentDatepicker!=null) transaction.remove(fragmentDatepicker);
         transaction.commit();

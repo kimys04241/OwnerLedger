@@ -57,17 +57,17 @@ public class AdapterDaily extends BaseAdapter {
         if(view==null){
             view=inflater.inflate(R.layout.list_item_inside_daily, viewGroup, false);
         }
-        
+
         TextView tv=view.findViewById(R.id.list_item_tv);
         DailyData dailyData=dataList.get(position);
         tv.setText(dailyData.getDivision()+":"+dailyData.getSales());
         if(dailyData.getDivision().equals(DailyData.divisionSales)){
             view.setBackgroundColor(Color.RED);
-            view.setTag(dailyData);
+           // view.setTag(dailyData);
         }
         else{
             view.setBackgroundColor(Color.BLUE);
-            view.setTag(dailyData);
+            //view.setTag(dailyData);
         }
         return view;
     }
