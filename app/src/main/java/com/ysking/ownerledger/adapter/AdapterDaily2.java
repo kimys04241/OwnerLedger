@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.ysking.ownerledger.R;
 import com.ysking.ownerledger.dailydata.DailyData;
 import com.ysking.ownerledger.database.DailyDB;
+import com.ysking.ownerledger.fragments.FragmentDaily;
 
 import java.util.ArrayList;
 
@@ -104,9 +105,11 @@ public class AdapterDaily2 extends RecyclerView.Adapter{
                     }
                     view.setBackgroundColor(Color.LTGRAY);
                     preItemView=view;
+                    FragmentDaily.setPreItemView(preItemView);
                 }else if(preItemView==null){
                     view.setBackgroundColor(Color.LTGRAY);
                     preItemView=view;
+                    FragmentDaily.setPreItemView(preItemView);
                 }
             }
         };

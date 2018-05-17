@@ -31,6 +31,7 @@ public class DailyData {
     }
 
     public DailyData(int no, String date, String division, String sales, String category, String classification, String connection, String memo) {
+        this.no=no;
         this.date = date;
         this.division = division;
         this.sales = sales;
@@ -38,6 +39,14 @@ public class DailyData {
         this.classification = classification;
         this.connection = connection;
         this.memo = memo;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
     }
 
     public String getDate() {

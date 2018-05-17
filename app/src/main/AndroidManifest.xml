@@ -34,9 +34,13 @@
         <activity
             android:name=".activitys.ActivityAddDaily"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionbar"></activity>
-        <activity android:name=".activitys.ActivityDialog" android:theme="@style/Theme.AppCompat.Dialog">
-
+            android:theme="@style/AppThemeNoActionbar" />
+        <activity
+            android:name=".activitys.ActivityDialog"
+            android:theme="@style/Theme.AppCompat.Dialog">
+        </activity>
+        <activity android:name=".activitys.ActivityModifyDaily"
+            android:theme="@style/AppThemeNoActionbar">
         </activity>
     </application>
 

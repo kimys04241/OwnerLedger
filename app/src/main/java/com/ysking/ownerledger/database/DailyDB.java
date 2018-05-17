@@ -3,6 +3,8 @@ package com.ysking.ownerledger.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.view.View;
 
 import com.ysking.ownerledger.dailydata.DailyData;
 import com.ysking.ownerledger.date.DateManager;
@@ -60,6 +62,22 @@ public class DailyDB {
             dataList.add(new DailyData(cursor.getInt(0), date, cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6)));
         }
         return cursorNotNull;
+    }
+
+    public void updateByNo(String date, DailyData dailyData){
+        String tableName=tableNameTransfer(date);
+        db.execSQL("update "+tableName+" set sales="+dailyData.getSales()+", category="+dailyData.getCategory()+", classification="
+                +dailyData.getClassification()+", connection="+dailyData.getConnection()+", memo="+dailyData.getMemo()
+                +" where no="+dailyData.getNo());
+        selectByTableName(date);
+    }
+
+    public void deleteByNo(String date, DailyData dailyData){
+        String tableName=tableNameTransfer(date);
+        int no=dailyData.getNo();
+        db.execSQL("delete from "+tableName+" where no="+no);
+
+        selectByTableName(date);
     }
 
     public ArrayList<DailyData> getDataList(){
