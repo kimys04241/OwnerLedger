@@ -3,9 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCCCCC"
-    android:alpha="0.5"
     android:clickable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#AAAAAA"
+        android:alpha="0.7">
+    </RelativeLayout>
 
     <DatePicker
         android:id="@+id/datepicker"
@@ -15,7 +20,6 @@
         android:datePickerMode="spinner"
         android:clickable="true"
         android:background="@color/collapse"
-        android:alpha="1"
         android:layout_marginTop="100dp">
     </DatePicker>
 

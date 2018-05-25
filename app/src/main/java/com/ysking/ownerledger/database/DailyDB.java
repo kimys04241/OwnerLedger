@@ -66,9 +66,9 @@ public class DailyDB {
 
     public void updateByNo(String date, DailyData dailyData){
         String tableName=tableNameTransfer(date);
-        db.execSQL("update "+tableName+" set sales="+dailyData.getSales()+", category="+dailyData.getCategory()+", classification="
-                +dailyData.getClassification()+", connection="+dailyData.getConnection()+", memo="+dailyData.getMemo()
-                +" where no="+dailyData.getNo());
+        db.execSQL("update "+tableName+" set sales='"+dailyData.getSales()+"', category='"+dailyData.getCategory()+"', classification='"
+                +dailyData.getClassification()+"', connection='"+dailyData.getConnection()+"', memo='"+dailyData.getMemo()
+                +"' where no="+dailyData.getNo());
         selectByTableName(date);
     }
 

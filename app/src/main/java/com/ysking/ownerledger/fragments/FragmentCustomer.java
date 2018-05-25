@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.ysking.ownerledger.R;
 import com.ysking.ownerledger.activitys.AddCustomer;
 import com.ysking.ownerledger.adapter.AdapterCustomer;
+import com.ysking.ownerledger.customerdata.CustomerData;
 import com.ysking.ownerledger.database.CustomerDB;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class FragmentCustomer extends Fragment {
     ImageView btnRemove;
 
     CustomerDB db;
-    ArrayList<String[]> customerList;
+    ArrayList<CustomerData> customerList;
 
     @Nullable
     @Override

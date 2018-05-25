@@ -5,22 +5,36 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.Volley;
+import com.ysking.ownerledger.customerdata.CustomerData;
+import com.ysking.ownerledger.database.CustomerDB;
+import com.ysking.ownerledger.database.DailyDB;
 import com.ysking.ownerledger.date.DateManager;
 import com.ysking.ownerledger.fragments.FragmentCustomer;
 import com.ysking.ownerledger.fragments.FragmentDaily;
 import com.ysking.ownerledger.fragments.FragmentDatepicker;
 import com.ysking.ownerledger.fragments.FragmentHome;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     TextView yearMonthDate;
+    RelativeLayout progressBarBackground;
+    ProgressBar progressBar;
 
     TabLayout tabLayout;
 
@@ -42,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String chart="Chart";
     public static final String board="Board";
 
+
+    String serverUrl="http://kimys04241.dothome.co.kr/OwnerLedger/insertDB.php";
+
     boolean isFirstClick=true;
 
     @Override
@@ -52,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar=findViewById(R.id.toolbar);
         tabLayout=findViewById(R.id.tab_layout);
         yearMonthDate=findViewById(R.id.year_month);
+        progressBarBackground=findViewById(R.id.progress_bar_background);
+        progressBar=findViewById(R.id.progress_bar);
 
         fragmentManager=getSupportFragmentManager();
 
@@ -92,11 +113,13 @@ public class MainActivity extends AppCompatActivity {
         int itemId=item.getItemId();
         switch (itemId){
             case R.id.menu_change_info:
+                break;
 
+            case R.id.menu_scrap:
                 break;
 
             case R.id.menu_backup:
-                //TODO n드라이브 연동
+                clickMenuBackup();
                 break;
 
             case R.id.menu_help:
@@ -104,6 +127,56 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void clickMenuBackup(){
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                CustomerDB db=new CustomerDB(MainActivity.this);
+                db.readAllDB();
+                ArrayList<CustomerData> customerList=db.getCustomerList();
+                if(customerList!=null){
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            progressBarBackground.setVisibility(View.VISIBLE);
+//                            progressBar.setVisibility(View.VISIBLE);
+//                        }
+//                    });
+                    int size=customerList.size();
+                    RequestQueue requestQueue= Volley.newRequestQueue(MainActivity.this);
+
+                    for(int i=0; i<size; i++){
+                        CustomerData customer=customerList.get(i);
+
+                        SimpleMultiPartRequest multiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                new AlertDialog.Builder(MainActivity.this).setMessage(response).setPositiveButton("확인", null).create().show();
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                new AlertDialog.Builder(MainActivity.this).setMessage(error.getMessage()).setPositiveButton("확인", null).create().show();
+                            }
+                        });
+
+                        multiPartRequest.addStringParam("name", customer.getName());
+                        multiPartRequest.addStringParam("phone", customer.getPhone());
+                        multiPartRequest.addStringParam("birth", customer.getBirth());
+                        multiPartRequest.addStringParam("gender", customer.getGender());
+                        multiPartRequest.addStringParam("address", customer.getAddress());
+                        multiPartRequest.addStringParam("detail", customer.getDetail());
+                        requestQueue.add(multiPartRequest);
+                    }
+                }else return;
+
+            }
+        }).start();
+    }
+
+
 
     public void setTab(){
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_home_black_24dp).setTag(home));
@@ -151,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void inflateHomeFragment(){
         //TODO 타이틀 가운데로
-        toolbar.setTitle(R.string.appbar_title_home);
+//        toolbar.setTitle(R.string.appbar_title_home);
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         if(currentFragment!=null) transaction.remove(currentFragment);
         FragmentHome fragmentHome=new FragmentHome();
@@ -162,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void inflateCustomerFragment(){
-        toolbar.setTitle(R.string.appbar_title_customer);
+//        toolbar.setTitle(R.string.appbar_title_customer);
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         if(currentFragment!=null) transaction.remove(currentFragment);
         FragmentCustomer fragmentCustomer=new FragmentCustomer();
@@ -173,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void inflateDialyFragment(){
-        toolbar.setTitle("일별장부");
+//        toolbar.setTitle("일별장부");
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         if(currentFragment!=null) transaction.remove(currentFragment);
         FragmentDaily fragmentDaily=new FragmentDaily();
@@ -201,5 +274,11 @@ public class MainActivity extends AppCompatActivity {
         if(fragmentDatepicker!=null) transaction.remove(fragmentDatepicker);
         transaction.commit();
     }
+
+    RequestQueue.RequestFinishedListener requestFinishedListener=new RequestQueue.RequestFinishedListener() {
+        @Override
+        public void onRequestFinished(Request request) {
+        }
+    };
 
 }

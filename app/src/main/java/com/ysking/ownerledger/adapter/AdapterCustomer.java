@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ysking.ownerledger.R;
+import com.ysking.ownerledger.customerdata.CustomerData;
 
 import java.util.ArrayList;
 
@@ -21,14 +22,14 @@ import java.util.ArrayList;
 public class AdapterCustomer extends RecyclerView.Adapter {
 
     Context context;
-    ArrayList<String[]> customerList;
+    ArrayList<CustomerData> customerList;
 
     private boolean headrFlag=false;
 
     private static TextView preTv;
     private static View preView;
 
-    public AdapterCustomer(Context context, ArrayList<String[]> customerList) {
+    public AdapterCustomer(Context context, ArrayList<CustomerData> customerList) {
         this.context = context;
         this.customerList=customerList;
     }
@@ -72,12 +73,11 @@ public class AdapterCustomer extends RecyclerView.Adapter {
     }
 
     private void bodyBind(VH vh, int position){
-        String[] customer=customerList.get(position-1);
+        CustomerData customer=customerList.get(position-1);
         vh.tvNo.setText(position+"");
-        vh.tvName.setText(customer[0]);
-        vh.tvPhone.setText(customer[1]);
-        vh.tvBirth.setText(customer[2]);
-        Log.i("TAG", "custoemr"+position+customer[0]+" "+customer[1]+" "+customer[2]);
+        vh.tvName.setText(customer.getName());
+        vh.tvPhone.setText(customer.getPhone());
+        vh.tvBirth.setText(customer.getBirth());
     }
 
     @Override

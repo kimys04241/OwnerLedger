@@ -7,13 +7,18 @@
         android:title="정보변경"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/menu_backup"
+        android:id="@+id/menu_scrap"
         android:title="스크랩열람"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_backup"
+        android:title="백업"
         app:showAsAction="never"/>
     <item
         android:id="@+id/menu_help"
         android:title="도움말"
         app:showAsAction="never" />
+
 
 
 </menu>

@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.ysking.ownerledger.customerdata.CustomerData;
+
 import java.util.ArrayList;
 
 /**
@@ -22,7 +24,7 @@ public class CustomerDB {
     String customerAddress;
     String customerDetail;
 
-    ArrayList<String[]> customerList=new ArrayList<>();
+    ArrayList<CustomerData> customerList=new ArrayList<>();
 
 
     private String dbName="customer.db";
@@ -62,8 +64,10 @@ public class CustomerDB {
             String address=cursor.getString(5);
             String detail=cursor.getString(6);
 
+            CustomerData customerData=new CustomerData(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5)
+            , cursor.getString(6));
 
-            customerList.add(new String[]{cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6)});
+            customerList.add(customerData);
 
 
 //            for(int i=0; i<readResult[0].length; i++){
@@ -88,12 +92,12 @@ public class CustomerDB {
         }
 
         for(int i=0; i<customerList.size(); i++){
-            String[] customer=customerList.get(i);
-            writeDB(customer[0], customer[1], customer[2], customer[3], customer[4], customer[5]);
+            CustomerData customer=customerList.get(i);
+            writeDB(customer.getName(), customer.getPhone(), customer.getBirth(), customer.getGender(), customer.getAddress(), customer.getDetail());
         }
     }
 
-    public ArrayList<String[]> getCustomerList() {
+    public ArrayList<CustomerData> getCustomerList() {
         return customerList;
     }
 }
