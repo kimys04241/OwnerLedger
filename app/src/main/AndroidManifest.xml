@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ysking.ownerledger">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -39,9 +39,11 @@
             android:theme="@style/AppThemeNoActionbar" />
         <activity
             android:name=".activitys.ActivityDialog"
-            android:theme="@style/Theme.AppCompat.Dialog">
-        </activity>
-        <activity android:name=".activitys.ActivityModifyDaily"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity
+            android:name=".activitys.ActivityModifyDaily"
+            android:theme="@style/AppThemeNoActionbar"></activity>
+        <activity android:name=".activitys.ActivityBackup"
             android:theme="@style/AppThemeNoActionbar">
         </activity>
     </application>

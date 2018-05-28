@@ -1,5 +1,6 @@
 package com.ysking.ownerledger;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.SimpleMultiPartRequest;
 import com.android.volley.toolbox.Volley;
+import com.ysking.ownerledger.activitys.ActivityBackup;
 import com.ysking.ownerledger.customerdata.CustomerData;
 import com.ysking.ownerledger.database.CustomerDB;
 import com.ysking.ownerledger.database.DailyDB;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String board="Board";
 
 
-    String serverUrl="http://kimys04241.dothome.co.kr/OwnerLedger/insertDB.php";
+    private final String serverUrl="http://kimys04241.dothome.co.kr/OwnerLedger/insertCustomer.php";
 
     boolean isFirstClick=true;
 
@@ -130,51 +132,62 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickMenuBackup(){
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                CustomerDB db=new CustomerDB(MainActivity.this);
-                db.readAllDB();
-                ArrayList<CustomerData> customerList=db.getCustomerList();
-                if(customerList!=null){
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            progressBarBackground.setVisibility(View.VISIBLE);
-//                            progressBar.setVisibility(View.VISIBLE);
-//                        }
-//                    });
-                    int size=customerList.size();
-                    RequestQueue requestQueue= Volley.newRequestQueue(MainActivity.this);
+        Intent intent=new Intent(this, ActivityBackup.class);
+        startActivity(intent);
 
-                    for(int i=0; i<size; i++){
-                        CustomerData customer=customerList.get(i);
 
-                        SimpleMultiPartRequest multiPartRequest = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                new AlertDialog.Builder(MainActivity.this).setMessage(response).setPositiveButton("확인", null).create().show();
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                new AlertDialog.Builder(MainActivity.this).setMessage(error.getMessage()).setPositiveButton("확인", null).create().show();
-                            }
-                        });
 
-                        multiPartRequest.addStringParam("name", customer.getName());
-                        multiPartRequest.addStringParam("phone", customer.getPhone());
-                        multiPartRequest.addStringParam("birth", customer.getBirth());
-                        multiPartRequest.addStringParam("gender", customer.getGender());
-                        multiPartRequest.addStringParam("address", customer.getAddress());
-                        multiPartRequest.addStringParam("detail", customer.getDetail());
-                        requestQueue.add(multiPartRequest);
-                    }
-                }else return;
-
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                CustomerDB db=new CustomerDB(MainActivity.this);
+//                db.readAllDB();
+//                ArrayList<CustomerData> customerList=db.getCustomerList();
+//                if(customerList!=null){
+////                    runOnUiThread(new Runnable() {
+////                        @Override
+////                        public void run() {
+////                            progressBarBackground.setVisibility(View.VISIBLE);
+////                            progressBar.setVisibility(View.VISIBLE);
+////                        }
+////                    });
+//                    int size=customerList.size();
+//                    RequestQueue requestQueue= Volley.newRequestQueue(MainActivity.this);
+//
+//                    for(int i=0; i<size; i++){
+//                        CustomerData customer=customerList.get(i);
+//
+//                        SimpleMultiPartRequest multiPartRequest = getMultipart();
+//
+//
+//                        multiPartRequest.addStringParam("name", customer.getName());
+//                        multiPartRequest.addStringParam("phone", customer.getPhone());
+//                        multiPartRequest.addStringParam("birth", customer.getBirth());
+//                        multiPartRequest.addStringParam("gender", customer.getGender());
+//                        multiPartRequest.addStringParam("address", customer.getAddress());
+//                        multiPartRequest.addStringParam("detail", customer.getDetail());
+//                        requestQueue.add(multiPartRequest);
+//                    }
+//                }else return;
+//
+//            }
+//        }).start();
     }
+
+    private SimpleMultiPartRequest getMultipart(){
+        return new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                new AlertDialog.Builder(MainActivity.this).setMessage(response).setPositiveButton("확인", null).create().show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                new AlertDialog.Builder(MainActivity.this).setMessage(error.getMessage()).setPositiveButton("확인", null).create().show();
+            }
+        });
+    }
+
 
 
 
@@ -274,11 +287,5 @@ public class MainActivity extends AppCompatActivity {
         if(fragmentDatepicker!=null) transaction.remove(fragmentDatepicker);
         transaction.commit();
     }
-
-    RequestQueue.RequestFinishedListener requestFinishedListener=new RequestQueue.RequestFinishedListener() {
-        @Override
-        public void onRequestFinished(Request request) {
-        }
-    };
 
 }
