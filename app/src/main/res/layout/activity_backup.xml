@@ -75,81 +75,74 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/num1"
                 android:layout_marginRight="16dp"
                 android:height="60dp"
                 android:width="100dp"
                 android:layout_marginBottom="16dp"
-                android:onClick="clickNum1Btn"
                 android:text="1"/>
             <Button
+                android:id="@+id/num2"
                 android:height="60dp"
                 android:width="100dp"
-                android:onClick="clickNum2Btn"
                 android:text="2"/>
-            <Button android:layout_marginLeft="16dp"
+            <Button
+                android:id="@+id/num3"
+                android:layout_marginLeft="16dp"
                 android:height="60dp"
                 android:width="100dp"
-                android:onClick="clickNum3Btn"
                 android:text="3"/>
             <Button
+                android:id="@+id/num4"
                 android:height="60dp"
                 android:width="100dp"
                 android:layout_marginBottom="16dp"
-                android:onClick="clickNum4Btn"
                 android:text="4"/>
             <Button
+                android:id="@+id/num5"
                 android:height="60dp"
                 android:width="100dp"
-                android:onClick="clickNum5Btn"
                 android:text="5"/>
             <Button
+                android:id="@+id/num6"
                 android:layout_marginLeft="16dp"
                 android:height="60dp"
                 android:width="100dp"
-                android:onClick="clickNum6Btn"
                 android:text="6"/>
             <Button
+                android:id="@+id/num7"
                 android:height="60dp"
                 android:width="100dp"
                 android:layout_marginBottom="16dp"
-                android:onClick="clickNum7Btn"
                 android:text="7"/>
             <Button
+                android:id="@+id/num8"
                 android:height="60dp"
                 android:width="100dp"
-                android:onClick="clickNum8Btn"
                 android:text="8"/>
             <Button
+                android:id="@+id/num9"
                 android:layout_marginLeft="16dp"
                 android:height="60dp"
                 android:width="100dp"
-                android:onClick="clickNum9Btn"
                 android:text="9"/>
             <Button
+                android:id="@+id/cancel"
                 android:height="60dp"
                 android:width="100dp"
                 android:layout_marginBottom="16dp"
-                android:onClick="clickNumAllClearBtn"
                 android:text="초기화"/>
             <Button
+                android:id="@+id/num0"
                 android:height="60dp"
                 android:width="100dp"
-                android:onClick="clickNum0Btn"
                 android:text="0"/>
             <Button
+                android:id="@+id/delete"
                 android:layout_marginLeft="16dp"
                 android:height="60dp"
                 android:width="100dp"
-                android:onClick="clickNumBackBtn"
                 android:text="삭제"/>
         </GridLayout>
-
     </RelativeLayout>
-
-
-
-
-
-
-
 </RelativeLayout>
