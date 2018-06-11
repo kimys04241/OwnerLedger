@@ -94,12 +94,20 @@ public class ActivityBackup extends AppCompatActivity {
 
     private void clickDeleteBtn(){
         if(cnt<=0) return;
+        else if(cnt<=1) iv1.setBackgroundColor(Color.WHITE);
+        else if(cnt<=2) iv2.setBackgroundColor(Color.WHITE);
+        else if(cnt<=3) iv2.setBackgroundColor(Color.WHITE);
+        else if(cnt<=4) iv2.setBackgroundColor(Color.WHITE);
         cnt--;
         tempPassword[cnt]="";
 
     }
 
     private void clickCancelBtn(){
+        iv1.setBackgroundColor(Color.WHITE);
+        iv2.setBackgroundColor(Color.WHITE);
+        iv3.setBackgroundColor(Color.WHITE);
+        iv4.setBackgroundColor(Color.WHITE);
         cnt=0;
         tempPassword=new String[4];
     }
